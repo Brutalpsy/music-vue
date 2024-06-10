@@ -1,6 +1,13 @@
 <template>
+  <div
+    class="text-white text-center font-bold p-4 mb-4"
+    v-if="login_snow_alert"
+    :class="login_alert_varient"
+  >
+    {{ login_alert_msg }}
+  </div>
   <!-- Login Form -->
-  <vee-form v-show="tab === 'login'" @submit="login" :validationSchema="loginSchema">
+  <vee-form @submit="login" :validationSchema="loginSchema">
     <!-- Email -->
     <div class="mb-3">
       <label class="inline-block mb-2">Email</label>
@@ -24,6 +31,7 @@
       <ErrorMessage class="text-red-600" name="password" />
     </div>
     <button
+      :disabled="login_in_submission"
       type="submit"
       class="block w-full bg-purple-600 text-white py-1.5 px-3 rounded transition hover:bg-purple-700"
     >
@@ -34,6 +42,31 @@
 
 <script>
 export default {
-  name: 'LoginForm'
+  name: 'LoginForm',
+  data() {
+    return {
+      loginSchema: {
+        email: 'required|email',
+        password: 'required|min:3|max:100'
+      },
+      login_in_submission: false,
+      login_snow_alert: false,
+      login_alert_varient: 'bg-blue-500',
+      login_alert_msg: 'Please wait! We are loggin you in.'
+    }
+  },
+  methods: {
+    login(values) {
+      this.login_in_submission = true
+      this.login_snow_alert = true
+      this.login_alert_varient = 'bg-blue-500'
+      this.login_alert_msg = 'Please wait! We are loggin you in.'
+
+      this.login_alert_varient = 'bg-green-500'
+      this.login_alert_msg = 'Sucess! You are now logged in.'
+
+      console.log(values)
+    }
+  }
 }
 </script>

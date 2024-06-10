@@ -53,8 +53,8 @@
             </li>
           </ul>
 
-          <login-form></login-form>
-          <registration-form></registration-form>
+          <login-form v-if="tab === 'login'"></login-form>
+          <registration-form v-else></registration-form>
         </div>
       </div>
     </div>
@@ -76,27 +76,7 @@ export default {
   },
   data() {
     return {
-      tab: 'login',
-      schema: {
-        name: 'required|min:3|max:100|alpha_spaces',
-        email: 'required|min:3|max:100|email',
-        password: 'required|min:3|max:100|excluded:password',
-        age: 'required|min_value:18|max_value:100',
-        confirm_password: 'password_mismatch:@password',
-        country: 'required|country_excluded:Antartica',
-        tos: 'tos'
-      },
-      loginSchema: {
-        email: 'required|email',
-        password: 'required|min:3|max:100'
-      },
-      userData: {
-        country: 'USA'
-      },
-      reg_in_submission: false,
-      reg_snow_alert: false,
-      reg_alert_varient: 'bg-blue-500',
-      reg_alert_msg: 'Please wait! Your account is being created.'
+      tab: 'login'
     }
   },
   computed: {
@@ -105,20 +85,7 @@ export default {
       modalVisibility: 'isOpen'
     })
   },
-  methods: {
-    register(values) {
-      this.reg_snow_alert = true
-      this.reg_in_submission = true
-      this.reg_alert_varient = 'bg-blue-500'
-      this.reg_alert_msg = 'Please wait! Your account is being created.'
-      this.reg_alert_varient = 'bg-green-500'
-      this.reg_alert_msg = 'Success! Your account is being created'
-      console.log(values)
-    },
-    login(values) {
-      console.log(values)
-    }
-  }
+  methods: {}
 }
 </script>
 
