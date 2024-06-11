@@ -53,20 +53,20 @@ export default {
       login_snow_alert: false,
       login_alert_varient: 'bg-blue-500',
       login_alert_msg: 'Please wait! We are loggin you in.'
-    }
+    };
   },
   methods: {
     login(values) {
-      this.login_in_submission = true
-      this.login_snow_alert = true
-      this.login_alert_varient = 'bg-blue-500'
-      this.login_alert_msg = 'Please wait! We are loggin you in.'
+      this.login_in_submission = true;
+      this.login_snow_alert = true;
+      this.login_alert_varient = 'bg-blue-500';
+      this.login_alert_msg = 'Please wait! We are loggin you in.';
 
-      this.login_alert_varient = 'bg-green-500'
-      this.login_alert_msg = 'Sucess! You are now logged in.'
+      this.login_alert_varient = 'bg-green-500';
+      this.login_alert_msg = 'Sucess! You are now logged in.';
 
-      console.log(values)
+      console.log(values);
     }
   }
-}
+};
 </script>

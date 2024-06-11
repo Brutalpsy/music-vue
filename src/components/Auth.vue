@@ -62,11 +62,10 @@
 </template>
 
 <script>
-import { mapState, mapWritableState } from 'pinia'
-import useModalStore from '@/stores/modal'
-import { ErrorMessage } from 'vee-validate'
-import LoginForm from '@/components/LoginForm.vue'
-import RegistrationForm from '@/components/RegisterForm.vue'
+import { mapState, mapWritableState } from 'pinia';
+import useModalStore from '@/stores/modal';
+import LoginForm from '@/components/LoginForm.vue';
+import RegistrationForm from '@/components/RegisterForm.vue';
 
 export default {
   name: 'Auth',
@@ -77,7 +76,7 @@ export default {
   data() {
     return {
       tab: 'login'
-    }
+    };
   },
   computed: {
     ...mapState(useModalStore, ['hiddenClass']),
@@ -86,7 +85,7 @@ export default {
     })
   },
   methods: {}
-}
+};
 </script>
 
 <style></style>

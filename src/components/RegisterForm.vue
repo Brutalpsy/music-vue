@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import firebase from '@/includes/firebase'
+import { auth, db } from '@/includes/firebase';
 
 export default {
   name: 'RegistrationForm',
@@ -137,31 +137,29 @@ export default {
       reg_snow_alert: false,
       reg_alert_varient: 'bg-blue-500',
       reg_alert_msg: 'Please wait! Your account is being created.'
-    }
+    };
   },
   methods: {
     async register(values) {
-      this.reg_snow_alert = true
-      this.reg_in_submission = true
-      this.reg_alert_varient = 'bg-blue-500'
-      this.reg_alert_msg = 'Please wait! Your account is being created.'
+      this.reg_snow_alert = true;
+      this.reg_in_submission = true;
+      this.reg_alert_varient = 'bg-blue-500';
+      this.reg_alert_msg = 'Please wait! Your account is being created.';
 
-      const userCredentials = null
+      let userCredentials = null;
       try {
-        userCredentials = await firebase
-          .auth()
-          .createUserWithEmailAndPassword(values.email, values.password)
+        userCredentials = await auth.createUserWithEmailAndPassword(values.email, values.password);
       } catch (error) {
-        this.reg_in_submission = true
-        this.reg_alert_varient = 'bg-red-500'
-        this.reg_alert_msg = 'An unexpected error occured. Please try again later.'
-        return
+        this.reg_in_submission = true;
+        this.reg_alert_varient = 'bg-red-500';
+        this.reg_alert_msg = 'An unexpected error occured. Please try again later.';
+        return;
       }
 
-      this.reg_alert_varient = 'bg-green-500'
-      this.reg_alert_msg = 'Success! Your account is being created'
-      console.log(userCredentials)
+      this.reg_alert_varient = 'bg-green-500';
+      this.reg_alert_msg = 'Success! Your account is being created';
+      console.log(userCredentials);
     }
   }
-}
+};
 </script>
