@@ -146,13 +146,21 @@ export default {
       this.reg_alert_varient = 'bg-blue-500'
       this.reg_alert_msg = 'Please wait! Your account is being created.'
 
-      const userCredentials = await firebase
-        .auth()
-        .createUserWithEmailAndPassword(values.email, values.password)
+      const userCredentials = null
+      try {
+        userCredentials = await firebase
+          .auth()
+          .createUserWithEmailAndPassword(values.email, values.password)
+      } catch (error) {
+        this.reg_in_submission = true
+        this.reg_alert_varient = 'bg-red-500'
+        this.reg_alert_msg = 'An unexpected error occured. Please try again later.'
+        return
+      }
 
       this.reg_alert_varient = 'bg-green-500'
       this.reg_alert_msg = 'Success! Your account is being created'
-      console.log(values)
+      console.log(userCredentials)
     }
   }
 }
