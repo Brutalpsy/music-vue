@@ -13,11 +13,11 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_APP_FIREBASE_MEASUREMENT_ID
 }
 
-
 const auth = firebase.initializeApp(firebaseConfig);
 const db = firebase.firestore();
-
+const usersCollection = db.collection('users')
 export {
   auth,
-  db
+  db,
+  usersCollection
 }
