@@ -114,7 +114,8 @@
 </template>
 
 <script>
-import { auth, usersCollection } from '@/includes/firebase';
+import { mapActions } from 'pinia';
+import useUserStore from '@/stores/user';
 
 export default {
   name: 'RegistrationForm',
@@ -140,30 +141,17 @@ export default {
     };
   },
   methods: {
+    ...mapActions(useUserStore, {
+      createUser: 'register'
+    }),
     async register(values) {
       this.reg_snow_alert = true;
       this.reg_in_submission = true;
       this.reg_alert_varient = 'bg-blue-500';
       this.reg_alert_msg = 'Please wait! Your account is being created.';
 
-      let userCredentials = null;
       try {
-        userCredentials = await auth.createUserWithEmailAndPassword(values.email, values.password);
-      } catch (error) {
-        console.log(error);
-        this.reg_in_submission = true;
-        this.reg_alert_varient = 'bg-red-500';
-        this.reg_alert_msg = 'An unexpected error occured. Please try again later.';
-        return;
-      }
-
-      try {
-        await usersCollection.add({
-          name: values.name,
-          email: values.email,
-          age: values.age,
-          country: values.country
-        });
+        await this.createUser(values);
       } catch (error) {
         console.log(error);
         this.reg_in_submission = true;
@@ -174,7 +162,7 @@ export default {
 
       this.reg_alert_varient = 'bg-green-500';
       this.reg_alert_msg = 'Success! Your account is being created';
-      console.log(userCredentials);
+      window.location.reload();
     }
   }
 };
