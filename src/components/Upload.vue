@@ -48,6 +48,7 @@ import { storage, auth, songsCollection } from '@/includes/firebase';
 
 export default {
   name: 'upload',
+  props: ['addSong'],
   data() {
     return {
       is_dragover: false,
@@ -98,13 +99,20 @@ export default {
             };
 
             song.url = await task.snapshot.ref.getDownloadURL();
-            await songsCollection.add(song);
+            const songRef = await songsCollection.add(song);
+            const songSnapShot = await songRef.get();
+            this.addSong(songSnapShot);
 
             this.uploads[uploadIndex].varient = 'bg-green-400';
             this.uploads[uploadIndex].icon = 'fas fa-check';
             this.uploads[uploadIndex].text_class = 'text-green-400';
           }
         );
+      });
+    },
+    cancelUploads() {
+      this.uploads.forEach((upload) => {
+        upload.task.cancel();
       });
     }
   },
