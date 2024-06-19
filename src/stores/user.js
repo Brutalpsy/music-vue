@@ -4,7 +4,6 @@ import { auth, usersCollection } from '@/includes/firebase';
 export default defineStore('user', {
   state: () => ({
     userLoggedIn: false,
-    user: null
   }),
   actions: {
     async register(values) {
@@ -24,18 +23,15 @@ export default defineStore('user', {
         displayName: values.name
       });
 
-      this.user = userCredentials.user.displayName;
       this.userLoggedIn = true;
     },
     async authenticate(values) {
-      const userCredential = await auth.signInWithEmailAndPassword(values.email, values.password);
+      await auth.signInWithEmailAndPassword(values.email, values.password);
 
-      this.user = userCredential.user.displayName;
       this.userLoggedIn = true;
     },
     async signOut() {
       await auth.signOut();
-
       this.userLoggedIn = false;
     }
   }

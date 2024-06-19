@@ -2,19 +2,19 @@
   <li class="p-6 bg-gray-50 border border-gray-200">
     <!-- Comment Author -->
     <div class="mb-5">
-      <div class="font-bold">{{ comment.user }}</div>
-      <time>{{ comment.date }}</time>
+      <div class="font-bold">{{ comment.userName }}</div>
+      <time>{{ comment.datePosted }}</time>
     </div>
 
     <p>
-      {{ comment.comment }}
+      {{ comment.content }}
     </p>
   </li>
 </template>
 
 <script>
 export default {
-  name: 'comment',
+  name: 'Comment',
   props: {
     comment: {
       type: Object,
