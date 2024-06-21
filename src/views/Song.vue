@@ -12,7 +12,13 @@
         type="button"
         class="z-50 h-24 w-24 text-3xl bg-white text-black rounded-full focus:outline-none"
       >
-        <i class="fas fa-play"></i>
+        <i
+          class="fas"
+          :class="{
+            'fa-play': !isPlayingCurrentSong(song),
+            'fa-pause': isPlayingCurrentSong(song)
+          }"
+        ></i>
       </button>
       <div class="z-50 text-left ml-8">
         <!-- Song Info -->
@@ -89,6 +95,7 @@ export default {
   computed: {
     ...mapStores(useUserStore),
     ...mapState(useUserStore, ['userLoggedIn']),
+    ...mapState(usePlayerStore, ['playing', 'isPlayingCurrentSong']),
     sortedComments() {
       return this.comments.slice().sort((a, b) => {
         if (this.sort == '1') {
