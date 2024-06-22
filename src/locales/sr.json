@@ -1,0 +1,11 @@
+{
+  "home": {
+    "listen": "Slusaj super muziku!"
+  },
+  "song": {
+    "commentCount": "Nema komentara | 1 komentar | {count} komentara"
+  },
+  "manage": {
+    "mySongs": "Moje Pesme"
+  }
+}
