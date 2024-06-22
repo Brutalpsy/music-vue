@@ -11,8 +11,8 @@
           }
         }"
         class="font-bold block text-gray-600"
-        >{{ this.song.modified_name }}</router-link
-      >
+        >{{ this.song.modified_name }}
+      </router-link>
       <span class="text-gray-500 text-sm">{{ this.song.display_name }}</span>
     </div>
     <div class="text-gray-600 text-lg">
