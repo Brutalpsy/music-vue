@@ -11,6 +11,7 @@ import { registerSW } from 'virtual:pwa-register';
 
 import App from './App.vue';
 import router from './router';
+import GlobalComponents from './includes/_globals';
 
 registerSW({ immediate: true });
 
@@ -24,6 +25,8 @@ auth.onAuthStateChanged(() => {
     app.use(router);
     app.use(VeeValidatePlugin);
     app.use(i18n);
+    app.use(GlobalComponents);
+
     app.directive('icon', Icon);
 
     app.mount('#app');

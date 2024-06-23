@@ -165,21 +165,22 @@ export default {
       comment_alert_message: 'Please wait! Your comment is being submitted.'
     };
   },
-  async created() {
-    const docSnapshot = await songsCollection.doc(this.$route.params.id).get();
+  async beforeRouteEnter(to, from, next) {
+    const docSnapshot = await songsCollection.doc(to.params.id).get();
+    next((vm) => {
+      if (!docSnapshot.exists) {
+        vm.$router.push({
+          name: 'home'
+        });
+        return;
+      }
+      vm.song = docSnapshot.data();
 
-    if (!docSnapshot.exists) {
-      this.$router.push({
-        name: 'home'
-      });
-      return;
-    }
-    this.song = docSnapshot.data();
+      vm.getComments();
 
-    await this.getComments();
-
-    const { sort } = this.$route.query;
-    this.sort = sort === '1' || sort === '2' ? sort : '1';
+      const { sort } = vm.$route.query;
+      vm.sort = sort === '1' || sort === '2' ? sort : '1';
+    });
   },
   watch: {
     sort(newVal) {
