@@ -29,3 +29,5 @@ coverage
 
 *.tsbuildinfo
 .env
+dev-dist
+dist
