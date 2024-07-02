@@ -31,3 +31,4 @@ coverage
 .env
 dev-dist
 dist
+.vercel
